@@ -9,41 +9,48 @@ public class GameOverseer : MonoBehaviour
     public PlayerManager Player;
     public List<EnemyTank> Enemies;
     public List<Spawner> Spawners;
+    public List<Collider> SpawnersColliders;
+    public int cooldownTime; // in seconds
     public int maxConcurrentEnemies;
-    public bool waiting;
+    public bool onCooldown;
 
     // Start is called before the first frame update
-    void Start()
-    {
-        waiting = false;
+    void Start() {
+        onCooldown = false;
         Player = GameObject.FindObjectOfType<PlayerManager>();
+        Spawners = GameObject.FindObjectsOfType<Spawner>().ToList<Spawner>();
+        foreach(Spawner spawnPoint in Spawners){
+            SpawnersColliders.Add(spawnPoint.gameObject.GetComponent<Collider>());
+        }
     }
 
     Spawner ElectSpawner(){
-        int spawnerIndex = Random.Range(0, 7);
+        int spawnerIndex = Random.Range(0, Spawners.Count-1);
         if(!Spawners[spawnerIndex].isVisible) return Spawners[spawnerIndex];
-        else{
-            while(true){
-                if(!Spawners[spawnerIndex].isVisible) return Spawners[spawnerIndex];
-            }
-        }
+        else return null;
     }
 
     // Update is called once per frame
+
     void FixedUpdate() {
         Enemies = GameObject.FindObjectsOfType<EnemyTank>().ToList<EnemyTank>();
-        Spawners = GameObject.FindObjectsOfType<Spawner>().ToList<Spawner>();
 
-        if(Enemies.Count < maxConcurrentEnemies && waiting){
+        if(Enemies.Count == maxConcurrentEnemies && !onCooldown) StopCoroutines();
+        
+        if(Enemies.Count < maxConcurrentEnemies && !onCooldown){
             StartCoroutine(SpawnerActivation());
         }
+    }
+    void StopCoroutines(){
+        StopAllCoroutines();
     }
 
     IEnumerator SpawnerActivation(){
         Spawner elected = ElectSpawner();
+        while(elected == null) elected = ElectSpawner();
         elected.Spawn();
-        waiting = true;
-        yield return new WaitForSecondsRealtime(1);
-        waiting = false;
+        onCooldown = true;
+        yield return new WaitForSecondsRealtime(cooldownTime);
+        onCooldown = false;
     }
 }
