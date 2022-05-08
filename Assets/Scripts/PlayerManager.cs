@@ -37,13 +37,17 @@ public class PlayerManager : Tank
         }
     }
 
-    void OnCollisionEnter(Collision collision){
-        if(collision.collider == vulnerability){
+    void OnTriggernter(Collider collision){
+        collision.GetComponent<Tank>().shellIsLive = false;
+        if(collision.GetComponent<EnemyTank>()){
+            collision.GetComponent<EnemyTank>().overseer.enemyHasFired = false;
+        }
+        if(collision == vulnerability){
             maxLives--;
-            Destroy(collision.collider);
+            Destroy(collision.gameObject);
             if(maxLives == 0) GameOver();
         } else {
-            Destroy(collision.collider);
+            Destroy(collision.gameObject);
         }
     }
 

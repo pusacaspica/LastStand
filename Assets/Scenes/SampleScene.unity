@@ -192,6 +192,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5898721626061432145, guid: 7d104ac0294f01942abd191c96c23368,
         type: 3}
+      propertyPath: overseer
+      value: 
+      objectReference: {fileID: 1614959156}
+    - target: {fileID: 5898721626061432145, guid: 7d104ac0294f01942abd191c96c23368,
+        type: 3}
       propertyPath: spawnLocation.z
       value: -20
       objectReference: {fileID: 0}
@@ -594,6 +599,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5898721626061432145, guid: 7d104ac0294f01942abd191c96c23368,
+        type: 3}
+      propertyPath: overseer
+      value: 
+      objectReference: {fileID: 1614959156}
     - target: {fileID: 5898721626061432145, guid: 7d104ac0294f01942abd191c96c23368,
         type: 3}
       propertyPath: spawnLocation.x
@@ -1046,6 +1056,7 @@ MonoBehaviour:
   cooldownTime: 2
   maxConcurrentEnemies: 4
   onCooldown: 0
+  enemyHasFired: 0
 --- !u!1001 &1782603988
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1113,6 +1124,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5898721626061432145, guid: 7d104ac0294f01942abd191c96c23368,
+        type: 3}
+      propertyPath: overseer
+      value: 
+      objectReference: {fileID: 1614959156}
     - target: {fileID: 5898721626061432145, guid: 7d104ac0294f01942abd191c96c23368,
         type: 3}
       propertyPath: spawnLocation.x
@@ -1334,6 +1350,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5898721626061432145, guid: 7d104ac0294f01942abd191c96c23368,
         type: 3}
+      propertyPath: overseer
+      value: 
+      objectReference: {fileID: 1614959156}
+    - target: {fileID: 5898721626061432145, guid: 7d104ac0294f01942abd191c96c23368,
+        type: 3}
       propertyPath: spawnLocation.x
       value: -17.5
       objectReference: {fileID: 0}
@@ -1413,6 +1434,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5898721626061432145, guid: 7d104ac0294f01942abd191c96c23368,
         type: 3}
+      propertyPath: overseer
+      value: 
+      objectReference: {fileID: 1614959156}
+    - target: {fileID: 5898721626061432145, guid: 7d104ac0294f01942abd191c96c23368,
+        type: 3}
       propertyPath: spawnLocation.x
       value: 17.5
       objectReference: {fileID: 0}
@@ -1490,5 +1516,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5898721626061432145, guid: 7d104ac0294f01942abd191c96c23368,
+        type: 3}
+      propertyPath: overseer
+      value: 
+      objectReference: {fileID: 1614959156}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7d104ac0294f01942abd191c96c23368, type: 3}

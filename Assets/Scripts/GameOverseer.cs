@@ -12,10 +12,11 @@ public class GameOverseer : MonoBehaviour
     public List<Collider> SpawnersColliders;
     public int cooldownTime; // in seconds
     public int maxConcurrentEnemies;
-    public bool onCooldown;
+    public bool onCooldown, enemyHasFired;
 
     // Start is called before the first frame update
     void Start() {
+        enemyHasFired = false;
         onCooldown = false;
         Player = GameObject.FindObjectOfType<PlayerManager>();
         Spawners = GameObject.FindObjectsOfType<Spawner>().ToList<Spawner>();
@@ -35,22 +36,22 @@ public class GameOverseer : MonoBehaviour
     void FixedUpdate() {
         Enemies = GameObject.FindObjectsOfType<EnemyTank>().ToList<EnemyTank>();
 
-        if(Enemies.Count == maxConcurrentEnemies && !onCooldown) StopCoroutines();
+        // if(Enemies.Count == maxConcurrentEnemies && !onCooldown) StopCoroutines();
         
         if(Enemies.Count < maxConcurrentEnemies && !onCooldown){
-            StartCoroutine(SpawnerActivation());
+            //StartCoroutine(SpawnerActivation());
+            Invoke("SpawnerActivation", cooldownTime);
         }
     }
-    void StopCoroutines(){
-        StopAllCoroutines();
+    void ResetCooldown(){
+        onCooldown = false;
     }
 
-    IEnumerator SpawnerActivation(){
+    void SpawnerActivation(){
         Spawner elected = ElectSpawner();
         while(elected == null) elected = ElectSpawner();
         elected.Spawn();
         onCooldown = true;
-        yield return new WaitForSecondsRealtime(cooldownTime);
-        onCooldown = false;
+        Invoke("ResetCooldown", 0);
     }
 }

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
+    public GameOverseer overseer;
     public Camera mainCamera;
     public Plane[] planes;
     public bool isVisible, loaded;
@@ -39,5 +40,6 @@ public class Spawner : MonoBehaviour
         }
         loaded=true;
         enemy.GetComponent<EnemyTank>().spawner = this;
+        enemy.GetComponent<EnemyTank>().overseer = overseer;
     }
 }
