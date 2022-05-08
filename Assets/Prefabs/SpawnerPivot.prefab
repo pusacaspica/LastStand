@@ -46,9 +46,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2cd7e07df3f0af4dbd5713fab6d5f9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainCamera: {fileID: 0}
   isVisible: 0
   spawnedObject: {fileID: 7743552745457900888, guid: d6c93ff59c0a46344bb3754d6cbbd0de,
     type: 3}
+  boundary:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
+  spawnLocation: {x: 0, y: 0, z: 20}
 --- !u!135 &7396715476686593829
 SphereCollider:
   m_ObjectHideFlags: 0

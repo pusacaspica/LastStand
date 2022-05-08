@@ -26,7 +26,7 @@ public class GameOverseer : MonoBehaviour
 
     Spawner ElectSpawner(){
         int spawnerIndex = Random.Range(0, Spawners.Count-1);
-        if(!Spawners[spawnerIndex].isVisible) return Spawners[spawnerIndex];
+        if(!Spawners[spawnerIndex].isVisible && !Spawners[spawnerIndex].loaded) return Spawners[spawnerIndex];
         else return null;
     }
 

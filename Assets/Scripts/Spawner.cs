@@ -6,12 +6,14 @@ public class Spawner : MonoBehaviour
 {
     public Camera mainCamera;
     public Plane[] planes;
-    public bool isVisible;
+    public bool isVisible, loaded;
     public GameObject spawnedObject;
-
     public Bounds boundary;
+    public Vector3 spawnLocation;
+
     // Start is called before the first frame update
     void Start() {
+        loaded = false;
         boundary = this.gameObject.GetComponentInChildren<SphereCollider>().bounds;
         mainCamera = Camera.main;
         planes = GeometryUtility.CalculateFrustumPlanes(mainCamera);
@@ -29,6 +31,13 @@ public class Spawner : MonoBehaviour
     }
 
     public void Spawn() {
-        Instantiate(spawnedObject, this.GetComponent<Collider>().transform.position, Quaternion.Euler(0.0f, this.transform.rotation.eulerAngles.y + 90.0f, 0.0f));
+        GameObject enemy;
+        if(this.transform.rotation.eulerAngles.y == 0.0f || this.transform.rotation.eulerAngles.y == 180.0f){
+            enemy = Instantiate(spawnedObject, spawnLocation, Quaternion.Euler(0.0f, 90.0f, 0.0f));
+        } else {
+            enemy = Instantiate(spawnedObject, spawnLocation, Quaternion.Euler(0.0f, this.transform.rotation.eulerAngles.y+90.0f, 0.0f));
+        }
+        loaded=true;
+        enemy.GetComponent<EnemyTank>().spawner = this;
     }
 }
