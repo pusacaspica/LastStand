@@ -19,9 +19,9 @@ public class ProjectileBehaviour : MonoBehaviour
 
         if(this.transform.position.y <= 0.0f){
             Owner.GetComponent<Tank>().shellIsLive = false;
-            if(Owner.GetComponent<EnemyTank>()){
+            /*if(Owner.GetComponent<EnemyTank>()){
                 Owner.GetComponent<EnemyTank>().overseer.enemyHasFired = false;
-            }
+            }*/
             Destroy(this.gameObject);
         }
     }

@@ -37,11 +37,11 @@ public class PlayerManager : Tank
         }
     }
 
-    void OnTriggernter(Collider collision){
+    void OnTriggerEnter(Collider collision){
         collision.GetComponent<Tank>().shellIsLive = false;
-        if(collision.GetComponent<EnemyTank>()){
+        /*if(collision.GetComponent<EnemyTank>()){
             collision.GetComponent<EnemyTank>().overseer.enemyHasFired = false;
-        }
+        }*/
         if(collision == vulnerability){
             maxLives--;
             Destroy(collision.gameObject);

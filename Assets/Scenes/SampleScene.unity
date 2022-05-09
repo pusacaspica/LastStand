@@ -848,7 +848,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.31055063, y: 2.7, z: 1.19}
+  m_Size: {x: 0.31055063, y: 2.7, z: 1}
   m_Center: {x: 0.5099782, y: 0.03385341, z: 0.09}
 --- !u!65 &1424701136
 BoxCollider:
@@ -861,7 +861,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.31055063, y: 2.7, z: 1.19}
+  m_Size: {x: 0.31055063, y: 2.7, z: 1}
   m_Center: {x: -0.5099782, y: 0.03385341, z: 0.09}
 --- !u!65 &1424701137
 BoxCollider:
@@ -874,7 +874,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 2.7, z: 0.5490628}
+  m_Size: {x: 1.24, y: 2.7, z: 0.5490628}
   m_Center: {x: 0, y: 0.03385341, z: -0.2254691}
 --- !u!1 &1573740341
 GameObject:
@@ -1054,7 +1054,8 @@ MonoBehaviour:
   Spawners: []
   SpawnersColliders: []
   cooldownTime: 2
-  maxConcurrentEnemies: 4
+  fireCooldownTime: 6
+  maxConcurrentEnemies: 3
   onCooldown: 0
   enemyHasFired: 0
 --- !u!1001 &1782603988

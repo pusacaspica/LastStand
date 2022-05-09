@@ -10,7 +10,7 @@ public class GameOverseer : MonoBehaviour
     public List<EnemyTank> Enemies;
     public List<Spawner> Spawners;
     public List<Collider> SpawnersColliders;
-    public int cooldownTime; // in seconds
+    public int cooldownTime, fireCooldownTime; // in seconds
     public int maxConcurrentEnemies;
     public bool onCooldown, enemyHasFired;
 
@@ -25,9 +25,15 @@ public class GameOverseer : MonoBehaviour
         }
     }
 
-    Spawner ElectSpawner(){
+    Spawner SelectSpawner(){
         int spawnerIndex = Random.Range(0, Spawners.Count-1);
         if(!Spawners[spawnerIndex].isVisible && !Spawners[spawnerIndex].loaded) return Spawners[spawnerIndex];
+        else return null;
+    }
+
+    EnemyTank SelectAttacker(){
+        int enemyIndex = Random.Range(0, Enemies.Count-1);
+        if(!Enemies[enemyIndex].shellIsLive && !enemyHasFired) return Enemies[enemyIndex];
         else return null;
     }
 
@@ -36,22 +42,33 @@ public class GameOverseer : MonoBehaviour
     void FixedUpdate() {
         Enemies = GameObject.FindObjectsOfType<EnemyTank>().ToList<EnemyTank>();
 
-        // if(Enemies.Count == maxConcurrentEnemies && !onCooldown) StopCoroutines();
+        //if(Enemies.Count == maxConcurrentEnemies && !onCooldown) StopCoroutines();
         
         if(Enemies.Count < maxConcurrentEnemies && !onCooldown){
-            //StartCoroutine(SpawnerActivation());
-            Invoke("SpawnerActivation", cooldownTime);
+            StartCoroutine(SpawnEnemy());
+        }
+
+        if(Enemies.Count > 1 && !enemyHasFired){
+            StartCoroutine(AttackPlayer());
         }
     }
-    void ResetCooldown(){
-        onCooldown = false;
+
+    IEnumerator AttackPlayer(){
+        EnemyTank attacker = SelectAttacker();
+        if(attacker == null) yield return null;
+        attacker.Fire();
+        enemyHasFired = true;
+        attacker.shellIsLive = true;
+        yield return new WaitForSeconds(fireCooldownTime);
+        enemyHasFired = false;
     }
 
-    void SpawnerActivation(){
-        Spawner elected = ElectSpawner();
-        while(elected == null) elected = ElectSpawner();
-        elected.Spawn();
+    IEnumerator SpawnEnemy(){
+        Spawner enemy = SelectSpawner();
+        if(enemy == null) yield return null;
+        enemy.Spawn();
         onCooldown = true;
-        Invoke("ResetCooldown", 0);
+        yield return new WaitForSeconds(cooldownTime);
+        onCooldown = false;
     }
 }
