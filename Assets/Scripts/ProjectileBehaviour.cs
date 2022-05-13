@@ -25,4 +25,21 @@ public class ProjectileBehaviour : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
+
+    private void OnTriggerEnter(Collider other) {
+        Debug.Log("other is "+other.name+" and the tag is "+other.tag);
+        if(other.gameObject.tag == "Vulnerability"){
+            Debug.Log("got him!");
+            if(other.gameObject.transform.parent.parent.gameObject.GetComponent<PlayerManager>()) 
+                other.gameObject.transform.parent.parent.gameObject.GetComponent<PlayerManager>().takeHit();
+            if(Owner) Owner.GetComponent<Tank>().shellIsLive = false;
+            Destroy(this.gameObject);
+            Owner.GetComponent<Tank>().shellIsLive = false;
+        } else if (other.gameObject.tag == "Invulnerability"){
+            Debug.Log("darn!");
+            if(Owner) Owner.GetComponent<Tank>().shellIsLive = false;
+            Destroy(this.gameObject);
+        }
+    }
+
 }
