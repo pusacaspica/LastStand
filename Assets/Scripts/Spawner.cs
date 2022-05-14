@@ -33,11 +33,7 @@ public class Spawner : MonoBehaviour
 
     public void Spawn() {
         GameObject enemy;
-        if(this.transform.rotation.eulerAngles.y == 0.0f || this.transform.rotation.eulerAngles.y == 180.0f){
-            enemy = Instantiate(spawnedObject, spawnLocation, Quaternion.Euler(0.0f, 90.0f, 0.0f));
-        } else {
-            enemy = Instantiate(spawnedObject, spawnLocation, Quaternion.Euler(0.0f, this.transform.rotation.eulerAngles.y+90.0f, 0.0f));
-        }
+        enemy = Instantiate(spawnedObject, spawnLocation, Quaternion.Euler(0.0f, this.transform.rotation.eulerAngles.y+90.0f, 0.0f));
         loaded=true;
         enemy.GetComponent<EnemyTank>().spawner = this;
         enemy.GetComponent<EnemyTank>().overseer = overseer;

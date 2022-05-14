@@ -2,10 +2,11 @@ using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerManager : Tank
 {
-
+    public GameOverseer overseer;
     public GameObject TankTip, Projectile;
     public Collider vulnerability;
     public float RotateVelocity;
@@ -39,10 +40,10 @@ public class PlayerManager : Tank
 
     public void takeHit(){
         currentLives--;
-        if(currentLives == 0) GameOver();
+        if(currentLives == 0) Invoke("GameOver", overseer.gameOverDelay);
     }
 
     void GameOver(){
-        UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu", UnityEngine.SceneManagement.LoadSceneMode.Single);
+        SceneManager.LoadScene("MainMenu");
     }
 }

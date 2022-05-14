@@ -10,7 +10,7 @@ public class GameOverseer : MonoBehaviour
     public List<EnemyTank> Enemies;
     public List<Spawner> Spawners;
     public List<Collider> SpawnersColliders;
-    public int cooldownTime, fireCooldownTime; // in seconds
+    public int cooldownTime, fireCooldownTime, gameOverDelay; // in seconds
     public int maxConcurrentEnemies;
     public bool onCooldown, enemyHasFired;
 
