@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class PlayerManager : Tank
 {
     public GameOverseer overseer;
-    public GameObject TankTip, Projectile;
+    public GameObject TankTip, Projectile, turnable;
     public Collider vulnerability;
     public float RotateVelocity;
     public int currentLives, score; 
@@ -31,10 +31,10 @@ public class PlayerManager : Tank
     // Update is called once per frame
     void FixedUpdate() {
         if(Input.GetKey(KeyCode.D)){
-            this.transform.Rotate(0.0f, RotateVelocity * 1.0f * Time.deltaTime * 10.0f, 0.0f, Space.Self);
+            turnable.transform.Rotate(0.0f, RotateVelocity * 1.0f * Time.deltaTime * 10.0f, 0.0f, Space.Self);
         }
         if(Input.GetKey(KeyCode.A)){
-            this.transform.Rotate(0.0f, RotateVelocity * -1.0f * Time.deltaTime * 10.0f, 0.0f, Space.Self);
+            turnable.transform.Rotate(0.0f, RotateVelocity * -1.0f * Time.deltaTime * 10.0f, 0.0f, Space.Self);
         }
     }
 

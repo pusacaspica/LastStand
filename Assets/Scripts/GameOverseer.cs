@@ -2,11 +2,12 @@ using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class GameOverseer : MonoBehaviour
 {
-
     public PlayerManager Player;
+    public TMP_Text scoreText, livesText;
     public List<EnemyTank> Enemies;
     public List<Spawner> Spawners;
     public List<Collider> SpawnersColliders;
@@ -40,6 +41,8 @@ public class GameOverseer : MonoBehaviour
     // Update is called once per frame
 
     void FixedUpdate() {
+        scoreText.text = Player.score.ToString();
+        livesText.text = Player.currentLives.ToString();
         Enemies = GameObject.FindObjectsOfType<EnemyTank>().ToList<EnemyTank>();
 
         //if(Enemies.Count == maxConcurrentEnemies && !onCooldown) StopCoroutines();
