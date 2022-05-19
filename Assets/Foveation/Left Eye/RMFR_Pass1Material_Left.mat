@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: RMFR_Pass1Material_Left
-  m_Shader: {fileID: 4800000, guid: dc085b69a27246f4294209fe5a7a0f7f, type: 3}
+  m_Shader: {fileID: 4800000, guid: 0b66b456b9910cc4d8fb6ab424a2677c, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 4
@@ -30,15 +30,16 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _eyeX: 0.5
-    - _eyeY: 0.5
-    - _fx: 0.296
-    - _fy: 0.3
+    - _eyeX: 0.50000006
+    - _eyeY: 0.50000006
+    - _fx: 0.7000001
+    - _fy: 0.6000001
     - _iApplyLogMap1: 1
     - _iApplyLogMap2: 1
     - _iResolutionX: 1440
     - _iResolutionY: 1600
     - _kernel: 1
     - _scaleRatio: 1.8
-    m_Colors: []
+    m_Colors:
+    - _DebugColor: {r: 1, g: 0, b: 0, a: 0.25}
   m_BuildTextureStacks: []

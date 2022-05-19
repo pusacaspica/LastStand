@@ -596,6 +596,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Version: 1
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
 --- !u!1 &513132277
 GameObject:
   m_ObjectHideFlags: 0
@@ -1296,8 +1304,12 @@ PrefabInstance:
       value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 794554191, guid: 126d619cf4daa52469682f85c1378b4a, type: 3}
+      propertyPath: m_TargetEye
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 794554191, guid: 126d619cf4daa52469682f85c1378b4a, type: 3}
       propertyPath: field of view
-      value: 97.48452
+      value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 794554191, guid: 126d619cf4daa52469682f85c1378b4a, type: 3}
       propertyPath: near clip plane
@@ -1320,8 +1332,12 @@ PrefabInstance:
       value: 6.98
       objectReference: {fileID: 0}
     - target: {fileID: 1158504236, guid: 126d619cf4daa52469682f85c1378b4a, type: 3}
+      propertyPath: m_TargetEye
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1158504236, guid: 126d619cf4daa52469682f85c1378b4a, type: 3}
       propertyPath: field of view
-      value: 97.48452
+      value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 1158504236, guid: 126d619cf4daa52469682f85c1378b4a, type: 3}
       propertyPath: near clip plane
@@ -1367,7 +1383,9 @@ PrefabInstance:
       propertyPath: m_VolumeLayerMask.m_Bits
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1474523839071698822, guid: 126d619cf4daa52469682f85c1378b4a, type: 3}
+    - {fileID: 2540499861894996066, guid: 126d619cf4daa52469682f85c1378b4a, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 126d619cf4daa52469682f85c1378b4a, type: 3}
 --- !u!4 &1203894924 stripped
 Transform:
@@ -1431,6 +1449,11 @@ MonoBehaviour:
   RotateVelocity: 10
   currentLives: 0
   score: 0
+--- !u!1 &1386216159 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100006, guid: 126d619cf4daa52469682f85c1378b4a, type: 3}
+  m_PrefabInstance: {fileID: 959440629}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1396725025 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: d165979fec94fc14e9d0ac8fa863e4de, type: 3}
@@ -1472,6 +1495,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
 --- !u!81 &1560149233
 AudioListener:
   m_ObjectHideFlags: 0
@@ -1610,6 +1654,29 @@ Camera:
   m_CorrespondingSourceObject: {fileID: 20000012175207052, guid: 126d619cf4daa52469682f85c1378b4a, type: 3}
   m_PrefabInstance: {fileID: 959440629}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1608232842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1386216159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e184fc465b896dd4d982bcaaec03fc04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TexturePass0: {fileID: 8400000, guid: fd738ba93abf3f9488660d01c6486d40, type: 2}
+  Pass1Material: {fileID: 2100000, guid: 48a9e02c328413f4f9e0855bca0e2773, type: 2}
+  Pass2Material: {fileID: 2100000, guid: 6c73d523034daaa4495a1685dd682eb9, type: 2}
+  DenoiseMaterial: {fileID: 2100000, guid: e22c161034b79fb4bb8d55209612a7e1, type: 2}
+  sigma: 1.8
+  fx: 0.4
+  fy: 0.4
+  eyeX: 0.5
+  eyeY: 0.5
+  savePath: 
+  sigma0: 0
 --- !u!1 &1614959154
 GameObject:
   m_ObjectHideFlags: 0
@@ -1620,6 +1687,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1614959155}
   - component: {fileID: 1614959156}
+  - component: {fileID: 1614959157}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -1666,6 +1734,20 @@ MonoBehaviour:
   maxConcurrentEnemies: 3
   onCooldown: 0
   enemyHasFired: 0
+--- !u!114 &1614959157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1614959154}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83238da6652c1d049bbfec4be84c1d9d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Left: {fileID: 1608232842}
+  Right: {fileID: 2016503881}
 --- !u!1 &1646549623
 GameObject:
   m_ObjectHideFlags: 0
@@ -2186,6 +2268,34 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7d104ac0294f01942abd191c96c23368, type: 3}
+--- !u!1 &2016503879 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: 126d619cf4daa52469682f85c1378b4a, type: 3}
+  m_PrefabInstance: {fileID: 959440629}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2016503881
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2016503879}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e184fc465b896dd4d982bcaaec03fc04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TexturePass0: {fileID: 8400000, guid: c71b936eae676454587849871e2a10a4, type: 2}
+  Pass1Material: {fileID: 2100000, guid: 46cf0d8cd9cb3d64bb0b8a15df6f4a0f, type: 2}
+  Pass2Material: {fileID: 2100000, guid: 12642a2ec28516640a995b1ba8439da7, type: 2}
+  DenoiseMaterial: {fileID: 2100000, guid: 7bd58d057ebeede4e898a2956ff7014d, type: 2}
+  sigma: 1.8
+  fx: 0.4
+  fy: 0.4
+  eyeX: 0.5
+  eyeY: 0.5
+  savePath: 
+  sigma0: 0
 --- !u!1001 &2041785105
 PrefabInstance:
   m_ObjectHideFlags: 0

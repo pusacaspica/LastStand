@@ -2,6 +2,7 @@
 {
 	Properties
 	{
+		_DebugColor ("Debug Color", Color) = (1, 0, 0, 1)
 		_MainTex ("Texture", 2D) = "white" {}
 		_Pass2Tex ("Texture", 2D) = "white" {}
 		_eyeX ("_eyeX", float) = 0.5
@@ -24,6 +25,7 @@
 
 			struct appdata
 			{
+				//fixed4 color: COLOR0;
 				float4 vertex : POSITION;
 				float2 uv : TEXCOORD0;
 			};
@@ -32,12 +34,14 @@
 			{
 				float2 uv : TEXCOORD0;
 				float4 vertex : SV_POSITION;
+				//fixed4 color: COLOR0;
 			};
 
 			v2f vert (appdata v)
 			{
 				v2f o;
 				o.vertex = UnityObjectToClipPos(v.vertex);
+				//o.color = v.color;
 				o.uv = v.uv;
 				return o;
 			}
@@ -229,19 +233,71 @@
 			uniform float _iResolutionY;
 			uniform float _eyeX;
 			uniform float _eyeY;
+			uniform float _fx;
+			uniform float _fy;
+			float4 _DebugColor; 
+
 			fixed4 frag (v2f i) : SV_Target
 			{
 				fixed4 col;
 				float2 iResolution = float2(_iResolutionX, _iResolutionY);
 				float dist = length(i.uv - float2(_eyeX, _eyeY));
-				if (dist < 0.2)
+
+				float maxDxPos = 1.0 - _eyeX;
+				float maxDyPos = 1.0 - _eyeY;
+				float maxDxNeg = _eyeX;
+				float maxDyNeg = _eyeY;
+
+				float norDxPos = _fx * maxDxPos / (_fx + maxDxPos);
+				float norDyPos = _fy * maxDyPos / (_fy + maxDyPos);
+				float norDxNeg = _fx * maxDxNeg / (_fx + maxDxNeg);
+				float norDyNeg = _fy * maxDyNeg / (_fy + maxDyNeg);
+
+				float2 tc = (i.uv - float2(_eyeX, _eyeY)); //i.uv.x > cursorPos.x : [0,maxDxPos] i.uv.x < cursorPos.x : [-maxDxNeg, 0]
+
+				float x = tc.x > 0 ? tc.x / maxDxPos : tc.x / maxDxNeg;//[0,1], [-1,0]
+				float y = tc.y > 0 ? tc.y / maxDyPos : tc.y / maxDyNeg; 
+
+				if (tc.x >= 0) {
+					x = x * norDxPos; //[0,norDxPos]
+					x = _fx * x / (_fx - x); //[0, 1]
+					x = x + _eyeX;
+				}
+				else {
+					x = x * norDxNeg;
+					x = _fx * x / (_fx + x);
+					x = x + _eyeX;
+				}
+
+				if (tc.y >= 0) {
+					y = y * norDyPos;
+					y = _fy * y / (_fy - y);
+					y = y + _eyeY;
+				}
+				else {
+					y = y * norDyNeg;
+					y = _fy * y / (_fy + y);
+					y = y + _eyeY;
+				}
+
+				float4 pq = (float4(x, y, 1, 1)); //0,1 --> 0-1
+
+				if (dist < 0.2){
 					col = tex2D(_Pass2Tex, i.uv);
-				else if (dist < 0.25)
-					col = gausBlur3(_Pass2Tex, i.uv, iResolution);
-				else if (dist < 0.35)
-					col = gausBlur5(_Pass2Tex, i.uv, iResolution);
-				else
-					col = gausBlur11(_Pass2Tex, i.uv, iResolution);
+					//col = tex2D(_Pass2Tex, pq);
+				}
+				else if (dist < 0.25){
+					col = gausBlur3(_Pass2Tex, i.uv, iResolution) * _DebugColor;
+					//col = tex2D(_Pass2Tex, pq);
+				}
+				else if (dist < 0.35){
+					col = gausBlur5(_Pass2Tex, i.uv, iResolution)* _DebugColor;
+					//col = tex2D(_Pass2Tex, pq);
+				}
+				else{
+					col = gausBlur11(_Pass2Tex, i.uv, iResolution)* _DebugColor;
+					//col = tex2D(_Pass2Tex, pq);
+				}
 				//if (dist < 0.2)
 				//	col = tex2D(_MainTex, i.uv);
 				//else if (dist < 0.25)

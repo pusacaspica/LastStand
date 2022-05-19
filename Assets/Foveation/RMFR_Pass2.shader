@@ -4,6 +4,7 @@ Shader "Custom/RMFR_Pass2"
 {
 	Properties
 	{
+		_DebugColor ("Debug Color", Color) = (1, 0, 0, 1)
 		_MainTex("Texture", 2D) = "white" {}
 		_MidTex("Texture", 2D) = "white" {}
 		_eyeX("_eyeX", float) = 0.5
@@ -32,15 +33,12 @@ Shader "Custom/RMFR_Pass2"
 				{
 					float4 vertex : POSITION;
 					float2 uv : TEXCOORD0;
-					UNITY_VERTEX_INPUT_INSTANCE_ID
 				};
 
 				struct v2f
 				{
 					float2 uv : TEXCOORD0;
 					float4 vertex : SV_POSITION;
-					UNITY_VERTEX_INPUT_INSTANCE_ID
-					UNITY_VERTEX_OUTPUT_STEREO
 				};
 
 				v2f vert(appdata v)
@@ -66,7 +64,7 @@ Shader "Custom/RMFR_Pass2"
 					uniform float _fx;
 					uniform float _fy;
 					uniform int _iApplyRFRMap2;
-
+					float4 _DebugColor;
 					half4 _MidTex_ST;
 				CBUFFER_END
 				
@@ -80,11 +78,13 @@ Shader "Custom/RMFR_Pass2"
 				float2 cursorPos = float2(_eyeX, _eyeY); //0-1 -> -1,1 (0,0)
 				float2 tc = (i.uv - cursorPos);
 
+				// EYE POSITIONS
 				float maxDxPos = 1.0 - cursorPos.x; // >= 0.5
 				float maxDyPos = 1.0 - cursorPos.y;
 				float maxDxNeg = cursorPos.x;
 				float maxDyNeg = cursorPos.y;
 
+				// EYE RADIUS
 				float norDxPos = _fx * maxDxPos / (_fx + maxDxPos);
 				float norDyPos = _fy * maxDyPos / (_fy + maxDyPos);
 				float norDxNeg = _fx * maxDxNeg / (_fx + maxDxNeg);

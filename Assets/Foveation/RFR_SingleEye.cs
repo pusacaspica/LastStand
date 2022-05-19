@@ -63,8 +63,8 @@ public class RFR_SingleEye : MonoBehaviour
     {
         Pass1MainL();
         Pass2MainL();
-        //Pass3DenoiseL();
-        Graphics.Blit(TexturePass2, dst);
+        Pass3DenoiseL();
+        Graphics.Blit(TextureDenoise, dst);
     }
 
     void Pass1MainL()
@@ -91,7 +91,7 @@ public class RFR_SingleEye : MonoBehaviour
 
     void Pass3DenoiseL()
     {
-        DenoiseMaterial.SetFloat("_iResolutionX", Screen.width/2);
+        DenoiseMaterial.SetFloat("_iResolutionX", Screen.width);
         DenoiseMaterial.SetFloat("_iResolutionY", Screen.height);
         DenoiseMaterial.SetFloat("_eyeX", eyeX);
         DenoiseMaterial.SetFloat("_eyeY", eyeY);
@@ -101,29 +101,29 @@ public class RFR_SingleEye : MonoBehaviour
 
     void keyControl()
     {
-        if (Input.GetKeyDown(KeyCode.Keypad7) || Input.GetKeyDown(KeyCode.O))
+        if (Input.GetKey(KeyCode.Keypad7) || Input.GetKey(KeyCode.O))
             sigma0 = sigma0 <= 0.05f ? 0.05f : sigma0 - 0.05f; //originally, capped at 1.2
-        if (Input.GetKeyDown(KeyCode.Keypad9) || Input.GetKeyDown(KeyCode.U))
+        if (Input.GetKey(KeyCode.Keypad9) || Input.GetKey(KeyCode.U))
             sigma0 = sigma0 >= 5.0f ? 5.0f : sigma0 + 0.05f; // capped at 2.8
         
-        if (Input.GetKeyDown(KeyCode.Keypad4) || Input.GetKeyDown(KeyCode.J))
+        if (Input.GetKey(KeyCode.Keypad4) || Input.GetKey(KeyCode.J))
             eyeX = eyeX <= 0.05f ? 0.05f : eyeX - 0.05f;
-        if (Input.GetKeyDown(KeyCode.Keypad6) || Input.GetKeyDown(KeyCode.L))
+        if (Input.GetKey(KeyCode.Keypad6) || Input.GetKey(KeyCode.L))
             eyeX = eyeX >= 0.95f ? 0.95f : eyeX + 0.05f;
 
-        if (Input.GetKeyDown(KeyCode.Keypad8) || Input.GetKeyDown(KeyCode.I))
+        if (Input.GetKey(KeyCode.Keypad8) || Input.GetKey(KeyCode.I))
             eyeY = eyeY >= 0.95f ? 0.95f : eyeY + 0.05f;
-        if (Input.GetKeyDown(KeyCode.Keypad5) || Input.GetKeyDown(KeyCode.K))
+        if (Input.GetKey(KeyCode.Keypad5) || Input.GetKey(KeyCode.K))
             eyeY = eyeY <= 0.05f ? 0.05f : eyeY - 0.05f;
 
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        if (Input.GetKey(KeyCode.LeftArrow))
             fx = fx <= 0.05f ? 0.05f : fx - 0.05f; // capped at 0.1
-        if (Input.GetKeyDown(KeyCode.RightArrow))
+        if (Input.GetKey(KeyCode.RightArrow))
             fx = fx >= 0.95f ? 1.0f : fx + 0.05f; // capped at 0.9
 
-        if (Input.GetKeyDown(KeyCode.UpArrow))
+        if (Input.GetKey(KeyCode.UpArrow))
             fy = fy >= 0.95f ? 1.0f : fy + 0.05f; // capped at 0.9
-        if (Input.GetKeyDown(KeyCode.DownArrow))
+        if (Input.GetKey(KeyCode.DownArrow))
             fy = fy <= 0.05f ? 0.05f : fy - 0.05f; // capped at 0.1
 
         if (Input.GetKeyDown(KeyCode.F9))
