@@ -1,6 +1,7 @@
 using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 using TMPro;
 
@@ -11,7 +12,7 @@ public class GameOverseer : MonoBehaviour
     public List<EnemyTank> Enemies;
     public List<Spawner> Spawners;
     public List<Collider> SpawnersColliders;
-    public int cooldownTime, fireCooldownTime, gameOverDelay; // in seconds
+    public int cooldownTime, fireCooldownTime, gameOverDelay, gameTime; // in seconds
     public int maxConcurrentEnemies;
     public bool onCooldown, enemyHasFired;
 
@@ -73,5 +74,9 @@ public class GameOverseer : MonoBehaviour
         onCooldown = true;
         yield return new WaitForSeconds(cooldownTime);
         onCooldown = false;
+    }
+
+    public void gameOver(){
+        SceneManager.LoadScene("MainMenu");
     }
 }

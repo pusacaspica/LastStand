@@ -36,11 +36,15 @@ public class PlayerManager : Tank
         if(Input.GetKey(KeyCode.A)){
             turnable.transform.Rotate(0.0f, RotateVelocity * -1.0f * Time.deltaTime * 10.0f, 0.0f, Space.Self);
         }
+
+        if(currentLives == 0){
+            GameOver();
+        }
     }
 
     public void takeHit(){
+        Debug.Log("got him!");
         currentLives--;
-        if(currentLives == 0) Invoke("GameOver", overseer.gameOverDelay);
     }
 
     void GameOver(){
