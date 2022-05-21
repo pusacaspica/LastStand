@@ -30,10 +30,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _eyeX: 0.50000006
-    - _eyeY: 0.50000006
-    - _fx: 0.7000001
-    - _fy: 0.6000001
+    - _eyeX: 0.5
+    - _eyeY: 0.5
+    - _fx: 0.4
+    - _fy: 0.4
     - _iApplyLogMap1: 1
     - _iApplyLogMap2: 1
     - _iResolutionX: 1440
