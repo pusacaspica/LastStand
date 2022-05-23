@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ProjectileBehaviour : MonoBehaviour
 {
@@ -38,6 +39,12 @@ public class ProjectileBehaviour : MonoBehaviour
             Debug.Log("darn!");
             if(Owner) Owner.GetComponent<Tank>().shellIsLive = false;
             Destroy(this.gameObject);
+        } else if (other.gameObject.tag == "Start"){
+            Debug.Log("Good luck");
+            SceneManager.LoadScene("Game");
+        } else if (other.gameObject.tag == "Quit"){
+            Debug.Log("See you space cowboy");
+            Application.Quit();
         }
     }
 
