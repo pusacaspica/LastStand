@@ -48,6 +48,11 @@ public class PlayerManager : Tank
     }
 
     void GameOver(){
-        SceneManager.LoadScene("MainMenu");
+        /*string jsonString = PlayerPrefs.GetString("Leaderboard");
+        Leaderboard leaderboard = JsonUtility.FromJson<Leaderboard>(jsonString);
+        if(){
+
+        }
+        else */SceneManager.LoadScene("NewLeaderboard");
     }
 }

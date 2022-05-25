@@ -2,13 +2,18 @@
 {
 	Properties
 	{
-		_DebugColor ("Debug Color", Color) = (1, 0, 0, 1)
+		_DebugColor11 ("Debug Color Gaussian 11", Color) = (1, 0, 0, 1)
+		_DebugColor5 ("Debug Color Gaussian 5", Color) = (0, 1, 0, 1)
+		_DebugColor3 ("Debug Color Gaussian 3", Color) = (0, 0, 1, 1)
 		_MainTex ("Texture", 2D) = "white" {}
 		_Pass2Tex ("Texture", 2D) = "white" {}
 		_eyeX ("_eyeX", float) = 0.5
 		_eyeY ("_eyeY", float) = 0.5
 		_iResolutionX ("_iResolutionX", float) = 500
 		_iResolutionY ("_iResolutionY", float) = 500
+		_denoiseRadius3 ("Denoise Radius Gaussian 3", float) = 0.2
+		_denoiseRadius5 ("Denoise Radius Gaussian 5", float) = 0.25
+		_denoiseRadius11 ("Denoise Radius Gaussian 11", float) = 0.35
 	}
 	SubShader
 	{
@@ -235,7 +240,12 @@
 			uniform float _eyeY;
 			uniform float _fx;
 			uniform float _fy;
-			float4 _DebugColor; 
+			uniform float _denoiseRadius3;
+			uniform float _denoiseRadius5;
+			uniform float _denoiseRadius11;
+			float4 _DebugColor11; 
+			float4 _DebugColor5; 
+			float4 _DebugColor3; 
 
 			fixed4 frag (v2f i) : SV_Target
 			{
@@ -282,20 +292,20 @@
 
 				float4 pq = (float4(x, y, 1, 1)); //0,1 --> 0-1
 
-				if (dist < 0.2){
+				if (dist < _denoiseRadius3){
 					col = tex2D(_Pass2Tex, i.uv);
 					//col = tex2D(_Pass2Tex, pq);
 				}
-				else if (dist < 0.25){
-					col = gausBlur3(_Pass2Tex, i.uv, iResolution) * _DebugColor;
+				else if (dist < _denoiseRadius5){
+					col = gausBlur3(_Pass2Tex, i.uv, iResolution) * _DebugColor3;
 					//col = tex2D(_Pass2Tex, pq);
 				}
-				else if (dist < 0.35){
-					col = gausBlur5(_Pass2Tex, i.uv, iResolution)* _DebugColor;
+				else if (dist < _denoiseRadius11){
+					col = gausBlur5(_Pass2Tex, i.uv, iResolution)* _DebugColor5;
 					//col = tex2D(_Pass2Tex, pq);
 				}
 				else{
-					col = gausBlur11(_Pass2Tex, i.uv, iResolution)* _DebugColor;
+					col = gausBlur11(_Pass2Tex, i.uv, iResolution)* _DebugColor11;
 					//col = tex2D(_Pass2Tex, pq);
 				}
 				//if (dist < 0.2)

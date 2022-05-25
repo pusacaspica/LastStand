@@ -80,7 +80,7 @@ Material:
     - _ZWrite: 1
     - _eyeX: 0.5
     - _eyeY: 0.5
-    - _fx: 0.4
+    - _fx: 1
     - _fy: 0.4
     - _iApplyLogMap2: 1
     - _iResolutionX: 1440

@@ -32,7 +32,7 @@ Material:
     m_Floats:
     - _eyeX: 0.5
     - _eyeY: 0.5
-    - _fx: 0.4
+    - _fx: 1
     - _fy: 0.4
     - _iApplyLogMap1: 1
     - _iApplyLogMap2: 1
