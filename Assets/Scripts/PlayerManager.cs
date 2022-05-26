@@ -35,8 +35,8 @@ public class PlayerManager : Tank
     // Update is called once per frame
     void FixedUpdate() {
 
-        deltaY = this.transform.rotation.eulerAngles.y - lastY;
-        lastY = this.transform.rotation.eulerAngles.y;
+        deltaY = turnable.transform.rotation.eulerAngles.y - lastY;
+        lastY = turnable.transform.rotation.eulerAngles.y;
 
         if(Input.GetKey(KeyCode.D)){
             turnable.transform.Rotate(0.0f, RotateVelocity * 1.0f * Time.deltaTime * 10.0f, 0.0f, Space.Self);
@@ -45,6 +45,7 @@ public class PlayerManager : Tank
             turnable.transform.Rotate(0.0f, RotateVelocity * -1.0f * Time.deltaTime * 10.0f, 0.0f, Space.Self);
         }
 
+        //turnable.transform.eulerAngles = new Vector3(0.0f, -ForwardDirection.transform.eulerAngles.y + turnable.transform.eulerAngles.y, 0.0f);
         //turnable.transform.Rotate(0.0f, (ForwardDirection.transform.rotation.eulerAngles.y - turnable.transform.rotation.eulerAngles.y) * Time.deltaTime, 0.0f);
 
         if(currentLives == 0){
