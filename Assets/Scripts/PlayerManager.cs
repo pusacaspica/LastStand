@@ -6,14 +6,18 @@ using UnityEngine.SceneManagement;
 
 public class PlayerManager : Tank
 {
+    public Transform ForwardDirection;
     public GameOverseer overseer;
     public GameObject TankTip, Projectile, turnable;
     public Collider vulnerability;
     public float RotateVelocity;
     public int currentLives, score; 
 
+    private float deltaY, lastY;
+
 
     void Start(){
+        lastY = 0.0f;
         score = 0;
         shellIsLive = false;
         currentLives = maxLives;
@@ -30,12 +34,18 @@ public class PlayerManager : Tank
 
     // Update is called once per frame
     void FixedUpdate() {
+
+        deltaY = this.transform.rotation.eulerAngles.y - lastY;
+        lastY = this.transform.rotation.eulerAngles.y;
+
         if(Input.GetKey(KeyCode.D)){
             turnable.transform.Rotate(0.0f, RotateVelocity * 1.0f * Time.deltaTime * 10.0f, 0.0f, Space.Self);
         }
         if(Input.GetKey(KeyCode.A)){
             turnable.transform.Rotate(0.0f, RotateVelocity * -1.0f * Time.deltaTime * 10.0f, 0.0f, Space.Self);
         }
+
+        //turnable.transform.Rotate(0.0f, (ForwardDirection.transform.rotation.eulerAngles.y - turnable.transform.rotation.eulerAngles.y) * Time.deltaTime, 0.0f);
 
         if(currentLives == 0){
             GameOver();

@@ -5,8 +5,7 @@ using UnityEngine;
 public class FoveationManager : MonoBehaviour
 {
     public bool isItOn;
-    public Rigidbody car;
-    public CarControls carControls;
+    public GameObject carControls;
     public RFR_SingleEye leftEye, rightEye;
     public Material leftEyeMaterial, rightEyeMaterial;
 
@@ -17,7 +16,9 @@ public class FoveationManager : MonoBehaviour
                 deltaFy, maxFy, 
                 deltaEyeX, maxEyeX, 
                 deltaEyeY, maxEyeY, 
-                maxRadius, deltaRadius;
+                maxRadius, deltaRadius,
+                deltaY, lastY,
+                secondDerivative, lastSecondDerivative;
 
     // the "vanilla" foveation factors' values are meant to be default values
     // although they are used sometimes as minimal values, THIS IS NOT THEIR MAIN FUNCTION
@@ -32,7 +33,9 @@ public class FoveationManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        carControls = car.GetComponent<CarControls>();
+        lastY = 0.0f;
+        lastSecondDerivative = 0.0f;
+
         leftEyeMaterial = leftEye.DenoiseMaterial;
         rightEyeMaterial = rightEye.DenoiseMaterial;
 
@@ -55,16 +58,22 @@ public class FoveationManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
+        deltaY = (carControls.transform.rotation.eulerAngles.y - lastY);
+        lastY = carControls.transform.rotation.eulerAngles.y;
+
+        secondDerivative = deltaY - lastSecondDerivative;
+        lastSecondDerivative = deltaY;
+
         float leftRadius3 = leftEyeMaterial.GetFloat("_denoiseRadius3");
         float leftRadius5 = leftEyeMaterial.GetFloat("_denoiseRadius5");
         float leftRadius11 = leftEyeMaterial.GetFloat("_denoiseRadius11");
 
-        deltaSigma = (carControls.AccelerationMagnitude > 0.0f ? 1 : -1) * car.velocity.magnitude/100;
-        deltaFx = (carControls.AccelerationMagnitude > 0.0f ? 1 : -1) * car.velocity.magnitude/100;
-        deltaFy = (carControls.AccelerationMagnitude > 0.0f ? 1 : -1) * car.velocity.magnitude/100;
-        deltaRadius = (carControls.AccelerationMagnitude > 0.0f ? 1 : -1) * car.velocity.magnitude/100;
+        deltaSigma = (secondDerivative > 1.0f ? 1 : -1) * deltaY/100;
+        deltaFx = (secondDerivative > 1.0f ? 1 : -1) * deltaY/100;
+        deltaFy = (secondDerivative > 1.0f ? 1 : -1) * deltaY/100;
+        deltaRadius = (secondDerivative > 1.0f ? 1 : -1) * deltaY/100;
         //if(deltaSigma == 0.0f) deltaSigma = defaultDeltaSigma;
         //if(deltaFx == 0.0f) deltaFx = defaultDeltaFx;
         //if(deltaFy == 0.0f) deltaFy = defaultDeltaFy;
@@ -94,7 +103,7 @@ public class FoveationManager : MonoBehaviour
 
         if(isItOn){
             // VELOCITY IS ZERO AND HAVEN'T RETURNED TO NORMAL? NEVER FEAR
-            if(Mathf.Abs(car.velocity.magnitude) <= 0.0025f){
+            if(Mathf.Abs(deltaY) <= 0.0025f){
                 if(leftEye.sigma0 > sigma) deltaSigma = lastDeltaSigma*10;
                 if(leftEye.fx < fx) deltaFx = lastDeltaFx*10;
                 if(leftEye.fy < fy) deltaFy = lastDeltaFy*10;
@@ -130,14 +139,14 @@ public class FoveationManager : MonoBehaviour
             if(leftEye.fy < maxFy) leftEye.fy = maxFy;
             if(rightEye.fy < maxFy) rightEye.fy = maxFy;
 
-            if(leftEyeMaterial.GetFloat("_denoiseRadius3") < maxRadius /*&& car.velocity.magnitude > 0.0025f*/) leftEye.DenoiseMaterial.SetFloat("_denoiseRadius3", maxRadius);
-            if(rightEyeMaterial.GetFloat("_denoiseRadius3") < maxRadius /*&& car.velocity.magnitude > 0.0025f*/) rightEye.DenoiseMaterial.SetFloat("_denoiseRadius3", maxRadius);
+            if(leftEyeMaterial.GetFloat("_denoiseRadius3") < maxRadius /*&& deltaY > 0.0025f*/) leftEye.DenoiseMaterial.SetFloat("_denoiseRadius3", maxRadius);
+            if(rightEyeMaterial.GetFloat("_denoiseRadius3") < maxRadius /*&& deltaY > 0.0025f*/) rightEye.DenoiseMaterial.SetFloat("_denoiseRadius3", maxRadius);
             
-            if(leftEyeMaterial.GetFloat("_denoiseRadius5") < maxRadius*1.05 /*&& car.velocity.magnitude > 0.0025f*/) leftEye.DenoiseMaterial.SetFloat("_denoiseRadius5", maxRadius*1.05f);
-            if(rightEyeMaterial.GetFloat("_denoiseRadius5") < maxRadius*1.05 /*&& car.velocity.magnitude > 0.0025f*/) rightEye.DenoiseMaterial.SetFloat("_denoiseRadius5", maxRadius*1.05f);
+            if(leftEyeMaterial.GetFloat("_denoiseRadius5") < maxRadius*1.05 /*&& deltaY > 0.0025f*/) leftEye.DenoiseMaterial.SetFloat("_denoiseRadius5", maxRadius*1.05f);
+            if(rightEyeMaterial.GetFloat("_denoiseRadius5") < maxRadius*1.05 /*&& deltaY > 0.0025f*/) rightEye.DenoiseMaterial.SetFloat("_denoiseRadius5", maxRadius*1.05f);
 
-            if(leftEyeMaterial.GetFloat("_denoiseRadius11") < maxRadius*1.15 /*&& car.velocity.magnitude > 0.0025f*/) leftEye.DenoiseMaterial.SetFloat("_denoiseRadius11", maxRadius*1.15f);
-            if(rightEyeMaterial.GetFloat("_denoiseRadius11") < maxRadius*1.15 /*&& car.velocity.magnitude > 0.0025f*/) rightEye.DenoiseMaterial.SetFloat("_denoiseRadius11", maxRadius*1.15f);
+            if(leftEyeMaterial.GetFloat("_denoiseRadius11") < maxRadius*1.15 /*&& deltaY > 0.0025f*/) leftEye.DenoiseMaterial.SetFloat("_denoiseRadius11", maxRadius*1.15f);
+            if(rightEyeMaterial.GetFloat("_denoiseRadius11") < maxRadius*1.15 /*&& deltaY > 0.0025f*/) rightEye.DenoiseMaterial.SetFloat("_denoiseRadius11", maxRadius*1.15f);
 
             // RETURN TO NORMAL
             if(leftEye.sigma0 < sigma) leftEye.sigma0 = sigma;
@@ -159,13 +168,13 @@ public class FoveationManager : MonoBehaviour
             if(rightEyeMaterial.GetFloat("_denoiseRadius11") > radius11) rightEye.DenoiseMaterial.SetFloat("_denoiseRadius11", radius11);
 
             // UPDATE LAST DELTAS IN CASE THE VALUES NEED TO BE CHANGED AFTER CAR HAVE STOPPED
-            if(car.velocity.magnitude != 0.0f){
-                lastDeltaSigma = (carControls.AccelerationMagnitude > 0.0f ? 1 : -1) *deltaSigma;
-                lastDeltaFx = (carControls.AccelerationMagnitude > 0.0f ? 1 : -1) *deltaFx;
-                lastDeltaFy = (carControls.AccelerationMagnitude > 0.0f ? 1 : -1) *deltaFy;
-                lastDeltaEyeX = (carControls.AccelerationMagnitude > 0.0f ? 1 : -1) *deltaEyeX;
-                lastDeltaEyeY = (carControls.AccelerationMagnitude > 0.0f ? 1 : -1) *deltaEyeY;
-                lastDeltaRadius = (carControls.AccelerationMagnitude > 0.0f ? 1 : -1) *deltaRadius;
+            if(deltaY != 0.0f){
+                lastDeltaSigma = (deltaY > 0.0f ? 1 : -1) *deltaSigma;
+                lastDeltaFx = (deltaY > 0.0f ? 1 : -1) *deltaFx;
+                lastDeltaFy = (deltaY > 0.0f ? 1 : -1) *deltaFy;
+                lastDeltaEyeX = (deltaY > 0.0f ? 1 : -1) *deltaEyeX;
+                lastDeltaEyeY = (deltaY > 0.0f ? 1 : -1) *deltaEyeY;
+                lastDeltaRadius = (deltaY > 0.0f ? 1 : -1) *deltaRadius;
             }
         }
     }

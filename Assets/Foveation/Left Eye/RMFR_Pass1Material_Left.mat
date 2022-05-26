@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: RMFR_Pass1Material_Left
-  m_Shader: {fileID: 4800000, guid: 0b66b456b9910cc4d8fb6ab424a2677c, type: 3}
+  m_Shader: {fileID: 4800000, guid: 1bbe5561f3c2c48459d4e25d7319765d, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 4
@@ -32,7 +32,7 @@ Material:
     m_Floats:
     - _eyeX: 0.5
     - _eyeY: 0.5
-    - _fx: 1
+    - _fx: 0.4
     - _fy: 0.4
     - _iApplyLogMap1: 1
     - _iApplyLogMap2: 1
