@@ -8,6 +8,8 @@ TagManager:
   - Vulnerability
   - Start
   - Quit
+  - Ground
+  - Enemy
   layers:
   - Default
   - TransparentFX

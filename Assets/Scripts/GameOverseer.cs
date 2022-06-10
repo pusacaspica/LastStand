@@ -46,14 +46,20 @@ public class GameOverseer : MonoBehaviour
         livesText.text = Player.currentLives.ToString();
         Enemies = GameObject.FindObjectsOfType<EnemyTank>().ToList<EnemyTank>();
 
-        //if(Enemies.Count == maxConcurrentEnemies && !onCooldown) StopCoroutines();
-        
         if(Enemies.Count < maxConcurrentEnemies && !onCooldown){
-            StartCoroutine(SpawnEnemy());
+            try {
+                StartCoroutine(SpawnEnemy());
+            } catch (System.NullReferenceException){
+                StopAllCoroutines();
+            }
         }
 
         if(Enemies.Count > 1 && !enemyHasFired){
-            StartCoroutine(AttackPlayer());
+            try{
+                StartCoroutine(AttackPlayer());
+            } catch(System.NullReferenceException) {
+                StopAllCoroutines();
+            }
         }
     }
 

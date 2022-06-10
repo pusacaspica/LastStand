@@ -1,5 +1,57 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1738097448493336942
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3948405369130569270}
+  - component: {fileID: 8045266387889123632}
+  m_Layer: 0
+  m_Name: Audio
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3948405369130569270
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1738097448493336942}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.269, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6292006044828401673}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8045266387889123632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1738097448493336942}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f46576deee914b46bfc93b8b0f608c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _source: {fileID: 0}
+  _impacts:
+  - {fileID: 8300000, guid: 12ccd8c3a62ab614280c5e56ada99d8f, type: 3}
+  - {fileID: 8300000, guid: 9fc72835301663c4f9d80b3b5b947cf0, type: 3}
+  - {fileID: 8300000, guid: 3216d4c95a163c7488a6dc34d933efb0, type: 3}
+  - {fileID: 8300000, guid: 47a255720758aa74fb34089c2c3b49f6, type: 3}
+  - {fileID: 8300000, guid: a246b506a33688148b96e5c58a931d29, type: 3}
+  clipIndex: 0
 --- !u!1 &5541014914280090920
 GameObject:
   m_ObjectHideFlags: 0
@@ -64,6 +116,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2715015371885921104}
+  - {fileID: 3948405369130569270}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -81,6 +134,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TravelSpeed: 0
   Owner: {fileID: 0}
+  SoundProjectile: {fileID: 8045266387889123632}
 --- !u!54 &9068024287937800475
 Rigidbody:
   m_ObjectHideFlags: 0

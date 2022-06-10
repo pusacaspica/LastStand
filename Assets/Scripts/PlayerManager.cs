@@ -10,9 +10,10 @@ public class PlayerManager : Tank
     public GameOverseer overseer;
     public GameObject TankTip, Projectile, turnable;
     public Collider vulnerability;
+    public ParticleSystem smoke;
+    public AudioSource source;
     public float RotateVelocity;
     public int currentLives, score; 
-
     private float deltaY, lastY;
 
 
@@ -25,6 +26,8 @@ public class PlayerManager : Tank
 
     void Update(){
         if(Input.GetKeyDown(KeyCode.Space)&&!shellIsLive){
+            source.Play();
+            smoke.Emit(1250);
             shellIsLive = true;
             GameObject shell = Instantiate(Projectile, TankTip.transform.position, TankTip.transform.rotation);
             shell.GetComponent<ProjectileBehaviour>().TravelSpeed = 10.0f;
