@@ -41,6 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5587311646239763362}
   - component: {fileID: 4343642350225517386}
+  - component: {fileID: 3326525380508809222}
   m_Layer: 0
   m_Name: Point
   m_TagString: Untagged
@@ -125,6 +126,26 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &3326525380508809222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1578897563860389098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 1
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
 --- !u!1 &1951790636610419943
 GameObject:
   m_ObjectHideFlags: 0
@@ -942,7 +963,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shellIsLive: 0
   maxLives: 3
-  ovrmanager: {fileID: 0}
   ForwardDirection: {fileID: 4272136854659818672}
   overseer: {fileID: 0}
   TankTip: {fileID: 4272136856052304297}
@@ -954,6 +974,7 @@ MonoBehaviour:
   RotateVelocity: 10
   currentLives: 0
   score: 0
+  highscore: 0
 --- !u!1 &4272136855949596025
 GameObject:
   m_ObjectHideFlags: 0

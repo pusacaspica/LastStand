@@ -1634,7 +1634,7 @@ MonoBehaviour:
   cooldownTime: 2
   fireCooldownTime: 6
   gameOverDelay: 20
-  gameTime: 10
+  gameTime: 90
   maxConcurrentEnemies: 4
   onCooldown: 0
   enemyHasFired: 0

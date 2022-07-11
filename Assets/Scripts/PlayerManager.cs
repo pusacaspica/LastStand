@@ -34,6 +34,9 @@ public class PlayerManager : Tank
     }*/
 
     void Start(){
+        if(!PlayerPrefs.HasKey("highscore")){
+            PlayerPrefs.SetInt("highscore", 0);
+        }
         /*if(File.Exists(ppath)){
             BinaryFormatter bf = new BinaryFormatter();
             FileStream fs = new FileStream(ppath, FileMode.Open);
@@ -97,6 +100,7 @@ public class PlayerManager : Tank
 
     public void GameOver(){
         if (score > HighscoreEntry.highscore){
+            PlayerPrefs.SetInt("highscore", score);
             HighscoreEntry.highscore = score;
             /*BinaryFormatter bf = new BinaryFormatter();
             FileStream fs = new FileStream(ppath, FileMode.OpenOrCreate);

@@ -15,7 +15,7 @@ public class RetrieveHighscore : MonoBehaviour
     public PlayerManager playerManager;
     // Start is called before the first frame update
     void Start() {
-        display.text = HighscoreEntry.highscore.ToString();
+        display.text = PlayerPrefs.GetInt("highscore").ToString();
         /*ppath = Application.persistentDataPath+"/highscore.bin";
         BinaryFormatter bf = new BinaryFormatter();
         FileStream fs = new FileStream(ppath, FileMode.Create);
