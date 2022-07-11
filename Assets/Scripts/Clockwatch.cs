@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Clockwatch : MonoBehaviour
 {
     public Renderer renderer;
     public float elapsedTime;
     public GameOverseer overseer;
+    public PlayerManager playerManager;
     public Material timerMaterial;
 
     void Start(){
@@ -19,8 +21,8 @@ public class Clockwatch : MonoBehaviour
     {
         elapsedTime += Time.deltaTime;
         timerMaterial.SetFloat("_Wheel_Slice", elapsedTime*(Mathf.PI*2)/overseer.gameTime);
-        if(elapsedTime >= overseer.gameTime){
-            overseer.gameOver();
+        if(elapsedTime >= overseer.gameTime && SceneManager.GetActiveScene().name == "Game"){
+            playerManager.GameOver();
         }
     }
 }

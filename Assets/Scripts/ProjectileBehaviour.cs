@@ -33,8 +33,8 @@ public class ProjectileBehaviour : MonoBehaviour
         Debug.Log("other is "+other.name+" and the tag is "+other.tag);
         if(other.gameObject.tag == "Vulnerability"){
             Debug.Log("got 'em!");
-            if(other.gameObject.transform.parent.parent.parent.parent.parent.gameObject.GetComponent<PlayerManager>()) 
-                other.gameObject.transform.parent.parent.parent.parent.parent.gameObject.GetComponent<PlayerManager>().takeHit();
+            if(other.gameObject.transform.parent.parent.parent.parent.parent.parent.gameObject.GetComponent<PlayerManager>()) 
+                other.gameObject.transform.parent.parent.parent.parent.parent.parent.gameObject.GetComponent<PlayerManager>().takeHit();
             if(Owner) Owner.GetComponent<Tank>().shellIsLive = false;
             AudioSource.PlayClipAtPoint(SoundProjectile._impacts[1], other.gameObject.transform.position, 1f);
             AudioSource.PlayClipAtPoint(SoundProjectile._impacts[2], other.gameObject.transform.position, 1f);
@@ -55,6 +55,10 @@ public class ProjectileBehaviour : MonoBehaviour
             Debug.Log("See you space cowboy");
             AudioSource.PlayClipAtPoint(SoundProjectile._impacts[1], other.gameObject.transform.position, 1f);
             Application.Quit();
+        } else if (other.gameObject.tag=="Menu"){
+            Debug.Log("aye aye champ");
+            AudioSource.PlayClipAtPoint(SoundProjectile._impacts[1], other.gameObject.transform.position, 1f);
+            SceneManager.LoadScene("MainMenu");
         }
     }
 

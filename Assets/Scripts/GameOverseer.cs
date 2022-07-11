@@ -81,8 +81,4 @@ public class GameOverseer : MonoBehaviour
         yield return new WaitForSeconds(cooldownTime);
         onCooldown = false;
     }
-
-    public void gameOver(){
-        SceneManager.LoadScene("MainMenu");
-    }
 }

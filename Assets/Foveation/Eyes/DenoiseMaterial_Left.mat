@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: DenoiseMaterial_Right
+  m_Name: DenoiseMaterial_Left
   m_Shader: {fileID: 4800000, guid: 415b1887c6880cd49b87fdf631cbd25c, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -83,14 +83,14 @@ Material:
     - _denoiseRadius5: 0.25
     - _eyeX: 0.5
     - _eyeY: 0.5
-    - _iResolutionX: 1832
-    - _iResolutionY: 1920
+    - _iResolutionX: 643
+    - _iResolutionY: 629
     - _scaleRatio: 1.6
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _DebugColor: {r: 1, g: 1, b: 1, a: 1}
-    - _DebugColor11: {r: 1, g: 0, b: 0, a: 1}
-    - _DebugColor3: {r: 0, g: 0, b: 1, a: 1}
-    - _DebugColor5: {r: 0, g: 1, b: 0, a: 1}
+    - _DebugColor11: {r: 1, g: 1, b: 1, a: 1}
+    - _DebugColor3: {r: 1, g: 1, b: 1, a: 1}
+    - _DebugColor5: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []

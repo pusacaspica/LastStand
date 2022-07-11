@@ -44,10 +44,6 @@ Shader "Custom/RMFR_Pass1"
 				{
 					v2f o;
 
-					UNITY_SETUP_INSTANCE_ID(v);
-					UNITY_INITIALIZE_OUTPUT(v2f, o);
-					UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(o);
-
 					o.vertex = UnityObjectToClipPos(v.vertex);
 					o.uv = v.uv;
 					return o;
@@ -70,7 +66,6 @@ Shader "Custom/RMFR_Pass1"
 
 				fixed4 frag(v2f i) : SV_Target
 				{
-				UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(i);
 
 					if (_iApplyRFRMap1 < 0.5)
 						return UNITY_SAMPLE_SCREENSPACE_TEXTURE(_MainTex, i.uv);

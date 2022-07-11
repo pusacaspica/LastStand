@@ -7,6 +7,6 @@ public class FreezeSelfRotation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        this.transform.Rotate(-this.transform.rotation.eulerAngles.x, 0.0f, -this.transform.rotation.eulerAngles.z, Space.Self);
+        this.transform.Rotate(-this.transform.rotation.eulerAngles.x, 0f, -this.transform.rotation.eulerAngles.z, Space.Self);
     }
 }

@@ -13,7 +13,7 @@ public class FreezeChildRotation : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         this.transform.Rotate(-parent.rotation.eulerAngles.x, 0.0f, -parent.rotation.eulerAngles.z, Space.Self);
     }
