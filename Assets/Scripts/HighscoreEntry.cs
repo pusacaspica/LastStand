@@ -4,11 +4,8 @@ using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.Serialization.Formatters.Binary;
-using UnityEngine;
 
-[System.Serializable]
-public class HighscoreEntry 
+public static class HighscoreEntry 
 {
-
-    public int highscore = -1;
+    public static int highscore = -1;
 }
