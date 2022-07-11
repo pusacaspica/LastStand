@@ -1188,72 +1188,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7d104ac0294f01942abd191c96c23368, type: 3}
---- !u!1 &788384672
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 788384674}
-  - component: {fileID: 788384673}
-  m_Layer: 0
-  m_Name: Foveation Manager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &788384673
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 788384672}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 100e7e1699844504a86dafc3bc3d3481, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isItOn: 0
-  carControls: {fileID: 87010198}
-  leftEye: {fileID: 1608232842}
-  rightEye: {fileID: 2016503881}
-  leftEyeMaterial: {fileID: 2100000, guid: e22c161034b79fb4bb8d55209612a7e1, type: 2}
-  rightEyeMaterial: {fileID: 2100000, guid: 7bd58d057ebeede4e898a2956ff7014d, type: 2}
-  deltaSigma: 0
-  maxSigma: 2.82
-  deltaFx: 0
-  maxFx: 0.09
-  deltaFy: 0
-  maxFy: 0.09
-  deltaEyeX: 0
-  maxEyeX: 0
-  deltaEyeY: 0
-  maxEyeY: 0
-  maxRadius: 0.09
-  deltaRadius: 0
-  deltaY: 0
-  lastY: 0
-  secondDerivative: 0
-  lastSecondDerivative: 0
---- !u!4 &788384674
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 788384672}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.029922485, y: 2.6728935, z: 1.6076778}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 14
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -1700,7 +1634,7 @@ MonoBehaviour:
   cooldownTime: 2
   fireCooldownTime: 6
   gameOverDelay: 20
-  gameTime: 90
+  gameTime: 10
   maxConcurrentEnemies: 4
   onCooldown: 0
   enemyHasFired: 0

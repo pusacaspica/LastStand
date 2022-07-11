@@ -1635,7 +1635,10 @@ MonoBehaviour:
   ppath: 
   hiscore: 
   highscore: 
+  entry:
+    highscore: -1
   display: {fileID: 758221960}
+  playerManager: {fileID: 195612587}
 --- !u!1 &587777423
 GameObject:
   m_ObjectHideFlags: 0

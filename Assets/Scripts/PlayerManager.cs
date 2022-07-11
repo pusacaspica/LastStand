@@ -11,6 +11,7 @@ using OVRTouchSample;
 [Serializable]
 public class PlayerManager : Tank
 {
+    public static PlayerManager manager;
     public Transform ForwardDirection;
     public GameOverseer overseer;
     public GameObject TankTip, Projectile, turnable;
@@ -18,13 +19,22 @@ public class PlayerManager : Tank
     public ParticleSystem smoke;
     public AudioSource source;
     public float RotateVelocity;
-    public int currentLives, score, highscore; 
+    public int currentLives, score; 
+    public int highscore = 0;
     private float deltaY, lastY;
     private string hiscore, ppath, _highscore;
     private PlayerManager json;
 
+    void Awake(){
+        if(manager != null){
+            Destroy(gameObject);
+            return;
+        }
+        manager = this;
+        DontDestroyOnLoad(gameObject);
+    }
+
     void Start(){
-        highscoreEntry = new HighscoreEntry();
         hiscore = "/highscore.bin";
         ppath = Application.persistentDataPath + hiscore;
         /*if(File.Exists(ppath)){
@@ -90,6 +100,7 @@ public class PlayerManager : Tank
 
     public void GameOver(){
         if (score > highscore){
+            highscore = score;
             /*BinaryFormatter bf = new BinaryFormatter();
             FileStream fs = new FileStream(ppath, FileMode.OpenOrCreate);
             highscoreEntry.highscore = score;

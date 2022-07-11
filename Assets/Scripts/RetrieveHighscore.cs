@@ -13,8 +13,10 @@ public class RetrieveHighscore : MonoBehaviour
     public string highscore;
     public HighscoreEntry entry;
     public TMP_Text display;
+    public PlayerManager playerManager;
     // Start is called before the first frame update
     void Start() {
+        display.text = playerManager.highscore.ToString();
         /*ppath = Application.persistentDataPath+"/highscore.bin";
         BinaryFormatter bf = new BinaryFormatter();
         FileStream fs = new FileStream(ppath, FileMode.Create);
